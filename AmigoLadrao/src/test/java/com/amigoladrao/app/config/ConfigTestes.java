@@ -22,7 +22,7 @@ public class ConfigTestes {
 		
 		SorteioConfig config;
 		try {
-			config = new SorteioConfig(properties);
+			config = new SorteioConfig("");
 			String[] nomes = config.recuperaNomes();
 			
 			Assert.assertEquals("Tio", nomes[0]);

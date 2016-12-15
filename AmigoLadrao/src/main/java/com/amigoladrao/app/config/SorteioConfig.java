@@ -7,19 +7,23 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class SorteioConfig {
 	
-	private Properties properties;
+	public final static String SORTEIO_PROPERTY = "SORTEIO_PROPERTY";
+	
+	private String propertyName;
+	
 	
 	@Inject
-	public SorteioConfig(Properties properties) throws IOException {
-		this.properties = properties;
+	public SorteioConfig(@Named(SorteioConfig.SORTEIO_PROPERTY) String propertyName) throws IOException {
+		this.propertyName = propertyName;
 	}
 
 	public String[] recuperaNomes() {
-		String value = this.properties.getProperty("participantes", "Tia");
-		return value.split(",");
+		
+		return "".split(",");
 	}
 
 }
