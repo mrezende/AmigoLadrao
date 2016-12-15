@@ -17,9 +17,13 @@ public class Sorteio {
 	public int sorteiaNumero(int i, int j) {
 		
 		// [0, 4 [ -> [1, 5 [
-		int numeroSorteado = (int) (Math.random() * (j - i + 1) + i);
+		int numeroSorteado = (int) (geraNumeroAleatorio() * (j - i + 1) + i);
 		
 		return numeroSorteado;
+	}
+
+	public double geraNumeroAleatorio() {
+		return Math.random();
 	}
 
 	public void trocaPosicao(Participante[] participantes, int i, int j) {

@@ -1,3 +1,4 @@
+package com.amigoladrao.app;
 
 
 import org.junit.Assert;
@@ -7,8 +8,9 @@ import org.junit.runner.RunWith;
 import com.amigoladrao.app.Sorteio;
 import com.amigoladrao.app.models.Participante;
 
-
+import mockit.Expectations;
 import mockit.Injectable;
+import mockit.Mocked;
 import mockit.integration.junit4.JMockit;
 
 @RunWith(JMockit.class)
@@ -28,23 +30,33 @@ public class SorteioTestes {
 	}
 	
 	@Test
-	public void sorteiaNumero_entreZeroEZero_retornaZeroSempre() {
+	public void sorteiaNumero_geraNumeroAleatorioIgual099_retornaQuatro() {
 		
 		Sorteio sorteio = new Sorteio();
-		int numeroSorteado = sorteio.sorteiaNumero(0, 0);
+		new Expectations(sorteio) {{
+			
+			sorteio.geraNumeroAleatorio(); result = 0.99;
+			
+		}};
 		
-		Assert.assertEquals(0, numeroSorteado);
+		int numeroSorteado = sorteio.sorteiaNumero(1, 4);
+		
+		Assert.assertEquals(4, numeroSorteado);
 		
 	}
 	
 	@Test
-	public void sorteiaNumero_entreUmEQuatro_retornaEntreUmEQuatro() {
+	public void sorteiaNumero_geraNumeroAleatorioIgualZero_retornaUm() {
 		Sorteio sorteio = new Sorteio();
+		new Expectations(sorteio) {{
+			
+			sorteio.geraNumeroAleatorio(); result = 0;
+			
+		}};
+		
 		int numeroSorteado = sorteio.sorteiaNumero(1, 4);
 		
-		boolean entreUmEQuatro = numeroSorteado >= 1 && numeroSorteado <= 4;
-		
-		Assert.assertTrue(entreUmEQuatro);
+		Assert.assertEquals(1, numeroSorteado);
 	}
 	
 	@Test

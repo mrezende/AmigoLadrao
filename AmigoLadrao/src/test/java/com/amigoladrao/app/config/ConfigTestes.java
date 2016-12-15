@@ -1,3 +1,4 @@
+package com.amigoladrao.app.config;
 import java.io.IOException;
 
 import org.junit.Assert;
