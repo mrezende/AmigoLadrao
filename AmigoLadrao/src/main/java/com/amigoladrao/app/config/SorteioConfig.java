@@ -6,13 +6,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import com.google.inject.Inject;
+
 public class SorteioConfig {
 	
-	Properties properties = new Properties();
+	private Properties properties;
 	
-	public SorteioConfig() throws IOException {
-		InputStream propertyFile = new FileInputStream("sorteio.properties");
-		this.properties.load(propertyFile);
+	@Inject
+	public SorteioConfig(Properties properties) throws IOException {
+		this.properties = properties;
 	}
 
 	public String[] recuperaNomes() {

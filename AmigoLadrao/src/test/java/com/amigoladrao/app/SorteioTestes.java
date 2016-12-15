@@ -60,6 +60,20 @@ public class SorteioTestes {
 	}
 	
 	@Test
+	public void sorteiaNumero_geraNumeroAleatorioIgual05_retornaTres() {
+		Sorteio sorteio = new Sorteio();
+		new Expectations(sorteio) {{
+			
+			sorteio.geraNumeroAleatorio(); result = 0.5;
+			
+		}};
+		
+		int numeroSorteado = sorteio.sorteiaNumero(1, 4);
+		
+		Assert.assertEquals(3, numeroSorteado);
+	}
+	
+	@Test
 	public void trocaPosicao_doisElementos_retornaTrue(@Injectable final Participante participante1, @Injectable final Participante participante2) {
 		Participante[] participantes = {participante1, participante2};
 		
