@@ -1,9 +1,13 @@
 package com.amigoladrao.app;
 
 
+
+import mockit.Verifications;
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.hamcrest.MatcherAssert.*;
 
 import com.amigoladrao.app.Sorteio;
 import com.amigoladrao.app.models.Participante;
@@ -13,25 +17,14 @@ import mockit.Injectable;
 import mockit.Mocked;
 import mockit.integration.junit4.JMockit;
 
+import java.util.Arrays;
+
 @RunWith(JMockit.class)
 public class SorteioTestes {
-	
-	@Test
-	public void sortear_umElemento_RetornaTrue(@Injectable Participante participante) {
-		
-		Participante[] participantes = {participante};
-		
-		Sorteio sorteio = new Sorteio();
-		
-		sorteio.sorteiaOrdem(participantes);
-		
-		Assert.assertEquals(participantes[0], participante);
 
-	}
-	
 	@Test
 	public void sorteiaNumero_geraNumeroAleatorioIgual099_retornaQuatro() {
-		
+
 		Sorteio sorteio = new Sorteio();
 		new Expectations(sorteio) {{
 			
@@ -47,6 +40,7 @@ public class SorteioTestes {
 	
 	@Test
 	public void sorteiaNumero_geraNumeroAleatorioIgualZero_retornaUm() {
+
 		Sorteio sorteio = new Sorteio();
 		new Expectations(sorteio) {{
 			
@@ -61,6 +55,7 @@ public class SorteioTestes {
 	
 	@Test
 	public void sorteiaNumero_geraNumeroAleatorioIgual05_retornaTres() {
+
 		Sorteio sorteio = new Sorteio();
 		new Expectations(sorteio) {{
 			
@@ -83,6 +78,28 @@ public class SorteioTestes {
 		Assert.assertEquals(participantes[0], participante2);
 		Assert.assertEquals(participantes[1], participante1);
 		
+	}
+
+	@Test
+	public void sorteiaOrdem_umParticipante_retornaMesmaOrdem() {
+		String[] nomes = { "Tio" };
+		Participante[] participantes = Participante.criaParticipantes(nomes);
+		Sorteio sorteio = new Sorteio();
+		Participante[] participantesEmbaralhados = sorteio.sorteiaOrdem(participantes);
+
+		Assert.assertEquals(nomes[0], participantesEmbaralhados[0].getNome());
+
+	}
+
+	@Test
+	public void sorteiaOrdem_doisParticipantes_retornaDoisParticipantes() {
+		String[] nomes = { "Tio" , "Tia"};
+		Participante[] participantes = Participante.criaParticipantes(nomes);
+		Sorteio sorteio = new Sorteio();
+		Participante[] participantesNovaOrdem = sorteio.sorteiaOrdem(participantes);
+
+		assertThat(Arrays.asList(participantesNovaOrdem), IsIterableContainingInAnyOrder.containsInAnyOrder(participantes));
+
 	}
 	
 	

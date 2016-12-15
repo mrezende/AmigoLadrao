@@ -2,16 +2,23 @@ package com.amigoladrao.app;
 
 import com.amigoladrao.app.models.Participante;
 
+import java.util.Arrays;
+
 public class Sorteio {
-	
-	public void sorteiaOrdem(Participante[] participantes) {
+
+
+
+	public Participante[] sorteiaOrdem(Participante[] participantes) {
+
+		Participante[] participanteEmbaralhado = Arrays.copyOf(participantes, participantes.length);
 		
-		for(int i = 0; i < participantes.length - 1; i++) {
-			int numeroSorteado = sorteiaNumero(i, participantes.length - 1);
-			trocaPosicao(participantes, i, numeroSorteado);
+		for(int i = 0; i < participanteEmbaralhado.length - 1; i++) {
+			int numeroSorteado = sorteiaNumero(i, participanteEmbaralhado.length - 1);
+			trocaPosicao(participanteEmbaralhado,i, numeroSorteado);
 		}
-		
-		
+
+
+		return participanteEmbaralhado;
 	}
 
 	public int sorteiaNumero(int i, int j) {
